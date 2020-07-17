@@ -1,0 +1,7 @@
+#!/bin/bash
+
+flirt -in /projects/buic227/dhet/FLIRT/sub04_MNIinanat.nii.gz -ref /projects/buic226/MNImasks/SensorimotorMask.nii.gz -out /projects/buic227/dhet/FLIRT/sub04_MNIinmask.nii.gz -omat sub04_mask2MNI.mat -dof 12
+
+convert_xfm -omat sub04_MNI2mask.mat -inverse sub04_mask2MNI.mat
+
+flirt -in /projects/buic226/MNImasks/SensorimotorMask.nii.gz -ref /projects/buic227/dhet/FLIRT/sub04_MNIinanat.nii.gz -applyxfm -init sub04_MNI2mask.mat -o /projects/buic227/dhet/FLIRT/sub04_maskinMNI.nii.gz
